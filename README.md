@@ -237,6 +237,8 @@ I'll give you those too. Ready to publish!
 
 
 
+```mermaid
+
 graph TD
 
 subgraph GitHub
@@ -271,4 +273,6 @@ F --> H
 G --> I
 J --> H
 J --> I
+
+```
 
