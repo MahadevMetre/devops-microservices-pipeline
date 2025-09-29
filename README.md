@@ -276,3 +276,38 @@ J --> I
 
 ```
 
+
+
+
+
+
+
+
+## CI Pipeline
+
+
+flowchart TD
+    A[Developer Pushes Code] --> B[GitHub Repo]
+    B --> C[GitHub Actions Triggered]
+    C --> D[Self-Hosted Runner]
+    D --> E[Docker Builds Images for Service A & B]
+
+
+
+
+
+
+
+
+## CD Pipeline
+
+flowchart TD
+    E[Docker Images Built] --> F[Helm CLI on Runner]
+    F --> G[Minikube Cluster]
+    G --> H[Service A Pod]
+    G --> I[Service B Pod]
+    H --> J[Exposed via NodePort 30080]
+    I --> K[Exposed via NodePort 30081]
+    L[Browser Accesses Services] --> J
+    L --> K
+
