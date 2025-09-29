@@ -285,14 +285,14 @@ J --> I
 
 ## CI Pipeline
 
-
+```mermaid
 flowchart TD
     A[Developer Pushes Code] --> B[GitHub Repo]
     B --> C[GitHub Actions Triggered]
     C --> D[Self-Hosted Runner]
     D --> E[Docker Builds Images for Service A & B]
 
-
+,,,
 
 
 
@@ -300,7 +300,7 @@ flowchart TD
 
 
 ## CD Pipeline
-
+```mermaid
 flowchart TD
     E[Docker Images Built] --> F[Helm CLI on Runner]
     F --> G[Minikube Cluster]
@@ -310,4 +310,4 @@ flowchart TD
     I --> K[Exposed via NodePort 30081]
     L[Browser Accesses Services] --> J
     L --> K
-
+```
