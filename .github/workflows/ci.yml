@@ -1,43 +1,29 @@
-name: CI Build & Push
+deploy:
+  runs-on: self-hosted
+  needs: build
 
-on:
-  push:
-    branches:
-      - main
-      - 'feature/**'
-  pull_request:
+  steps:
+  - name: Checkout code
+    uses: actions/checkout@v3
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+  - name: Set up kubectl config
+    run: |
+      mkdir -p $HOME/.kube
+      cp $HOME/.kube/config $HOME/.kube/config
+      chmod 600 $HOME/.kube/config
 
-    steps:
-      - name: 🧾 Checkout source
-        uses: actions/checkout@v3
+  - name: Set KUBECONFIG env var
+    run: echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
 
-      - name: 🛠️ Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+  - name: Set up Helm
+    uses: azure/setup-helm@v3
 
-      - name: 🔐 Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+  - name: Deploy service-a
+    run: helm upgrade --install service-a helm/charts/service-a --wait
 
-      - name: 🐳 Build & Push service-a image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./app/service-a
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/service-a:latest
-            ${{ secrets.DOCKER_USERNAME }}/service-a:${{ github.sha }}
+  - name: Deploy service-b
+    run: helm upgrade --install service-b helm/charts/service-b --wait
 
-      - name: 🐳 Build & Push service-b image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./app/service-b
-          push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/service-b:latest
-            ${{ secrets.DOCKER_USERNAME }}/service-b:${{ github.sha }}
+  - name: Verify deployment
+    run: kubectl get pods -o wide
+
