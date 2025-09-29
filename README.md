@@ -281,25 +281,20 @@ J --> I
 
 
 
+<details> <summary>📦 Click to Expand - Mermaid Diagrams</summary>
 
-
-## CI Pipeline
+## ⚙️ CI Pipeline
 
 ```mermaid
 flowchart TD
     A[Developer Pushes Code] --> B[GitHub Repo]
     B --> C[GitHub Actions Triggered]
     C --> D[Self-Hosted Runner]
-    D --> E[Docker Builds Images for Service A & B]
+    D --> E[Docker Builds Images for Service A & Service B]
+```
 
-,,,
+## 🚀 CD Pipeline
 
-
-
-
-
-
-## CD Pipeline
 ```mermaid
 flowchart TD
     E[Docker Images Built] --> F[Helm CLI on Runner]
@@ -311,3 +306,4 @@ flowchart TD
     L[Browser Accesses Services] --> J
     L --> K
 ```
+</details>
