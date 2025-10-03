@@ -279,9 +279,9 @@ J --> I
 
 
 
+# <summary>📦 Click to Expand - Mermaid Diagrams</summary>
 
-
-<details> <summary>📦 Click to Expand - Mermaid Diagrams</summary>
+<details> 
 
 ## ⚙️ CI Pipeline
 
