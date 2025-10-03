@@ -278,10 +278,9 @@ J --> I
 
 
 
+ <summary>📦 Click to Expand - Mermaid Diagrams</summary>
 
-# <summary>📦 Click to Expand - Mermaid Diagrams</summary>
 
-<details> 
 
 ## ⚙️ CI Pipeline
 
@@ -306,4 +305,4 @@ flowchart TD
     L[Browser Accesses Services] --> J
     L --> K
 ```
-</details>
+
